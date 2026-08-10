@@ -1,0 +1,12 @@
+{
+  "schema": "glaciereq.repo-capabilities.v1",
+  "repository": "GlacierEQ/baseten-serving-slo-circuit",
+  "capabilities": [
+    {
+      "id": "serving-slo-circuit",
+      "name": "Serving SLO Circuit",
+      "status": "SCAFFOLD",
+      "module": "src/serving_slo_circuit.py"
+    }
+  ]
+}

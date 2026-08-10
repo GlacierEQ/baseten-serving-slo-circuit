@@ -1,0 +1,11 @@
+{
+  "schema": "glaciereq.promotion-authority-grant.v1",
+  "repository": "GlacierEQ/baseten-serving-slo-circuit",
+  "source_sha": "f4f3a20e4e67fb66eb9e7e1e6d0be811d4c261721799b4a2f0b56c386be26821",
+  "proof_receipt_digest": "14f848b0c64d1bb8ac86a010ad203c8c8310602338f244273ed3aeea4757941c",
+  "not_after": 1788948639.994133,
+  "mac": "0e13179fa9b266c2b591531669c0126ce39acc8353bbbf842f8af8e715fbf92d",
+  "issuer": "local_operator_promotion_authority",
+  "verified": true,
+  "secret_ref": "src/promotion_authority.py::LOCAL_OPERATOR_SECRET"
+}

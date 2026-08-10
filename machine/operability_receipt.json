@@ -1,0 +1,26 @@
+{
+  "schema": "glaciereq.operability-receipt.v1",
+  "repository": "GlacierEQ/baseten-serving-slo-circuit",
+  "at": "2026-08-10T10:10Z",
+  "source_sha": "f4f3a20e4e67fb66eb9e7e1e6d0be811d4c261721799b4a2f0b56c386be26821",
+  "entry": "scripts/operate.py",
+  "primary_output": {
+    "module": "serving_slo_circuit",
+    "ok": true,
+    "repository": "GlacierEQ/baseten-serving-slo-circuit",
+    "smoke": {
+      "args": [
+        "ServingSloCircuitRequest(subject_id='sam"
+      ],
+      "content_checked": true,
+      "invoked": true,
+      "kind": "class",
+      "method": "evaluate",
+      "module_local": true,
+      "name": "Mechanism",
+      "result": "ServingSloCircuitReceipt(decision=<Decision.ALLOW: 'ALLOW'>, reasons=('scaffold_allow',), digest='de5a200a89430d2dec7318cf5aea51ee466c45d752e842d6d852e6bed15c045c', metrics={'scaffold': True, 'payload_keys': [], 'budget': 1.0})"
+    }
+  },
+  "dual_run_ok": true,
+  "result": "PASS"
+}

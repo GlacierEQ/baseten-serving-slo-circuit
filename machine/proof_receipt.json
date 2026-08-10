@@ -1,0 +1,31 @@
+{
+  "schema": "glaciereq.proof-receipt.v1",
+  "repository": "GlacierEQ/baseten-serving-slo-circuit",
+  "source_sha": "f4f3a20e4e67fb66eb9e7e1e6d0be811d4c261721799b4a2f0b56c386be26821",
+  "proof_id": "elite-baseten-serving-slo-circuit-1786356639",
+  "environment": {
+    "python": "/Users/kcbflux/.local/bin/python3.11",
+    "PYTHONPATH": "/Users/kcbflux/GlacierEQ_Swarm/job-app/repos/baseten-serving-slo-circuit:/Users/kcbflux/GlacierEQ_Swarm/job-app/repos/baseten-serving-slo-circuit/src",
+    "entry": "unittest"
+  },
+  "tests": [
+    "/Users/kcbflux/.local/bin/python3.11 -m unittest discover -s tests -v (x2)"
+  ],
+  "adversarial_tests": [
+    "tests/test_adversarial.py"
+  ],
+  "runtime": {
+    "operate": "scripts/operate.py (x2)",
+    "dual_run_ok": true,
+    "proof_dual_run_ok": true
+  },
+  "result": "PASS",
+  "limitations": [
+    "not production deployed",
+    "reference implementation only"
+  ],
+  "timestamp": "2026-08-10T10:10Z",
+  "artifact_hashes": {
+    "operability_receipt": "cb65fa5772cf360f1e130c12023e832a483e8ffd69040d69591524b2c73f0862"
+  }
+}
