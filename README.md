@@ -1,50 +1,49 @@
 # Serving SLO Circuit
 
-Independent GlacierEQ portfolio exhibit aligned to **Baseten** operating themes.
+Independent GlacierEQ portfolio implementation aligned to **Baseten** operating themes.
 
-> **Not affiliated.** This repository is not affiliated with, endorsed by, employed by, or deployed at Baseten.
-> No proprietary access, production deployment, customer impact, or company partnership is claimed.
+> **Not affiliated.** This repository is not affiliated with, endorsed by, employed by, or deployed at Baseten. No proprietary access, production deployment, customer impact, or company partnership is claimed.
 
-## Bottleneck (GlacierEQ hypothesis)
+## Purpose
 
-Model serving endpoints over-admit traffic when tail latency and error budgets drift without a hard circuit.
+Stop model-serving endpoints from continuing to admit full traffic after tail latency or error budgets are already broken.
 
-**Brick wall:** Silent success without receipts; affiliation or production claims without evidence.
+## Implemented circuit
 
-**Observed public pressure (snapshot hypothesis):** Public market pressure toward AI-enabled products and operators (hypothesis only).
+`ServingSloCircuit` is a deterministic **CLOSED → OPEN → HALF_OPEN → CLOSED** state machine driven by finite request-window evidence.
 
-## Innovation mechanism
+- `CLOSED`: healthy windows preserve full admission; latency, error, or insufficient-evidence breaches trip `OPEN`.
+- `OPEN`: traffic remains refused until the configured number of consecutive healthy recovery windows exists.
+- `HALF_OPEN`: only a bounded probe admission ratio is allowed; a breach immediately reopens the circuit; sufficient healthy probes recover `CLOSED`.
+- malformed windows, non-finite metrics, and `errors > requests` fail closed.
 
-**Serving SLO Circuit** — Track finite SLO metrics and trip a circuit breaker with explicit recovery gates before re-admission.
+The receipt exposes state, transition, admission ratio, latest observed window, reason codes, and a deterministic digest.
 
-## Target roles
+## Run
 
-- Applied AI Systems Engineer
-- Forward-Deployed Engineer
+```bash
+python -m pytest -q
+python scripts/operate.py
+```
 
-## Application move
+Build and install:
 
-Lead with a small, inspectable Serving SLO Circuit exhibit and explicit non-affiliation boundary.
+```bash
+python -m pip install build
+python -m build
+python -m pip install dist/*.whl
+serving-slo-circuit
+```
 
-## Current scaffold state
+## Proof surface
 
-This leaf is a **scaffold**: contracts, tests, and a stub mechanism exist so another engineer/AI can fill production-grade code without inventing company affiliation.
+- `src/serving_slo_circuit.py` — stateful SLO circuit
+- `src/serving_slo_cli.py` — installable execution surface
+- `tests/test_serving_slo_circuit.py` — trip/recovery/probe/evidence behavior
+- `tests/test_adversarial.py` — fail-closed adversarial coverage
+- `.github/workflows/tests.yml` — tests + cold-start + wheel build/install + installed CLI
+- `machine/` — existing Helix control-plane and promotion surfaces remain preserved
 
-| Surface | Path |
-|---------|------|
-| Mechanism stub | `src/serving_slo_circuit.py` |
-| Operate entry | `scripts/operate.py` |
-| Contract tests | `tests/` |
-| Target contract | `machine/target-contract.json` |
-| **AI fill-in brief** | **`DEV_UP_INSTRUCTIONS.md`** |
-| Issue contract | `ISSUE_CONTRACT.md` |
+## Current boundary
 
-## Non-claims
-
-- No Baseten employment, endorsement, proprietary data, or production use
-- No customer, revenue, latency, or scale claims without separate receipts
-- Scaffold tests define **intended behavior**, not verified production excellence
-
-## Next gate
-
-Implement mechanism + positive tests + operate receipt.
+The circuit consumes supplied SLO windows; it does not control Baseten infrastructure or claim production traffic results. The next depth step is a permitted metrics adapter plus a disposable HTTP inference service where the circuit can actually throttle/re-admit request traffic under induced latency and failure.
