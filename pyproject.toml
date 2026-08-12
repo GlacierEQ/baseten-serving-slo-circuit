@@ -1,9 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "baseten-serving-slo-circuit"
-version = "0.0.1"
-description = "Scaffold: Serving SLO Circuit (independent Baseten lens)"
+version = "1.0.0"
+description = "Stateful tail-latency and error-budget circuit breaker for model serving"
 requires-python = ">=3.11"
 dependencies = []
+
+[project.scripts]
+serving-slo-circuit = "serving_slo_cli:main"
+
+[tool.setuptools]
+py-modules = ["serving_slo_circuit", "serving_slo_cli", "promotion_authority"]
+package-dir = {"" = "src"}
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
